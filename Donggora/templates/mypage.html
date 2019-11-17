@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block body %}
+<div id="wrapper">
+  <!-- Sidebar -->
+  <ul class="sidebar navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="{%url 'mypage'%}">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>마이페이지</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{%url 'main'%}">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>메인화면</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'tables' %}"">
+        <i class="fas fa-fw fa-chart-area"></i>
+        <span>전체 투표 항목 조회</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'main' %}">
+        <i class="fas fa-fw fa-table"></i>
+        <span>투표생성</span></a>
+    </li>
+  </ul>
+  <div id="content-wrapper">
+    <div class="container-fluid">
+
+    <!-- Page Content -->
+    <div class="view_made" style=" text-align: center; height:900px width:auto" >
+      <h5>아직 만든 투표가 존재하지 않습니다.</h5>
+      <div class="exp1_white" >
+      </div>
+      <hr>
+    </div>
+    <div class="voted" style=" text-align: center; height:900px width:auto" >
+      <h5>아직 참여한 투표가 존재하지 않습니다</h5>
+      <a href="{%url 'vote'%}">투표 생성하러가기</a>
+      <div class="exp1_white">
+      </div>
+      <hr>
+    </div>
+
+  </div>
+  <!-- /.container-fluid -->
+
+  <!-- Sticky Footer -->
+  <footer class="sticky-footer">
+    <div class="container my-auto">
+      <div class="copyright text-center my-auto">
+        <span>Copyright © ChoiKangSunYim 2019</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+<!-- /.content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+{% endblock %}
