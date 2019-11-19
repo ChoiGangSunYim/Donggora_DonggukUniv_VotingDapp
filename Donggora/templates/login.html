@@ -18,6 +18,9 @@
               <label for="inputPassword">비밀번호</label>
             </div>
           </div>
+          {% if ctx %}
+          <p>{ctx.erorr}</p>
+          {% endif %}
           <button type="submit" class="btn btn-primary btn-block">로그인</button>
         </form>
         <div class="text-center">

@@ -1,6 +1,5 @@
-from django.urls import path
-from django.conf.urls import include
 from rest_framework import routers
+from django.urls import path,include
 from . import views
 from .views import UserViewSet, PollViewSet, VoteViewSet
 
@@ -11,10 +10,16 @@ router.register(r'vote', VoteViewSet)
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
     path('signup/', views.signup, name='signup'),
     path('polls/', views.polls, name='polls'),
     path('create/', views.create, name='create'),
+    path('mypage', views.mypage, name='mypage'),
+    path('vote', views.vote, name='vote'),
+    path('tables', views.tables, name='tables'),
+    path('findpw', views.findpw, name='findpw'),
 ]
