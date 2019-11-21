@@ -28,18 +28,12 @@
     </li>
   </ul>
 
-  <div id="content-wrapper" style="text-align:center">
-    <h2>내가 만든 투표</h2>
-    <p class="lead">학생회관 엘리베이터 개선 찬반 투표</p>
-    <progress value="20" max="100"></progress>&nbsp;&nbsp;&nbsp;&nbsp;
-    <p class="lead">신공학관 화장실 청결 문제 투표</p>
-      <progress value="30" max="100"></progress>&nbsp;&nbsp;&nbsp;&nbsp;
-    <hr>
-    <h2>내가 한 투표</h2>
-    <p class="lead">기숙사식당 개선 찬반 투표</p>
-    <progress value="70" max="100"></progress>&nbsp;&nbsp;&nbsp;&nbsp;
-    <p class="lead">도서관 출입 개선 찬반 투표</p>
-      <progress value="50" max="100"></progress>&nbsp;&nbsp;&nbsp;&nbsp;
+  <div id="content-wrapper" style="text-align:center; border : 3px solid gold; margin-left : 100px; margin-right : 100px;">
+    <h2>투표 만들기</h2><hr>
+    제목 : <input type="text"></label><br>
+    내용<br>
+    <textarea cols="40" rows="8"></textarea><br>
+    <input type="button" value="확인" onclick="location.href='{% url 'main' %}'">
   </div>
 </div>
 {% endblock %}

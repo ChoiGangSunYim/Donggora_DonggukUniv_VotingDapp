@@ -2,27 +2,12 @@
 {% block body %}
 <div>
   <div class="jumbotron">
-    <h1>투표 제목이욘</h1>
+    <h2>투표 제목...</h2>
     <hr>
-    <p class="lead">어쩌고저쩌고고곡고고 내용</p>
-  </div>
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">로그아웃 하시겠습니까?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">이 계정에서 나가려면 로그아웃 버튼을 누르세요.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
-          <a class="btn btn-primary" href="로그인.html">로그아웃</a>
-        </div>
-      </div>
-    </div>
+    <p class="lead">투표에 대한 설명......</p>
+    <hr>
+    <input type="button" value="찬성" onclick="location.href='{% url 'main' %}'">
+    <input type="button" value="반대" onclick="location.href='{% url 'main' %}'">
   </div>
 </div>
 {% endblock %}

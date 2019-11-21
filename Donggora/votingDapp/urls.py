@@ -1,4 +1,4 @@
-from django.urls import path,include
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
@@ -9,4 +9,5 @@ urlpatterns = [
     path('tables', views.tables, name='tables'),
     path('signup', views.signup, name='signup'),
     path('mypage', views.mypage, name='mypage'),
+    path('makeVote', views.makeVote, name='makeVote'),
 ]

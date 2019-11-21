@@ -17,12 +17,12 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'tables' %}"">
+      <a class="nav-link" href="{% url 'tables' %}">
         <i class="fas fa-fw fa-chart-area"></i>
         <span>전체 투표 항목 조회</span></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'main' %}">
+      <a class="nav-link" href="{% url 'makeVote' %}">
         <i class="fas fa-fw fa-table"></i>
         <span>투표생성</span></a>
     </li>
@@ -62,7 +62,7 @@
         <h1> </h1>
         <h3>지금 시작하세요</h3>
         <h5>첫 번째 투표를 만들 준비가 되셨나요? 동고라를 이용하여 쉽게 투표를 만들어보세요</h5>
-        <a href="vote.html">투표 만들러 가기</a>
+        <a href="{% url 'vote' %}">투표 만들러 가기</a>
         <div class="vote_pic">
             <img src='static\images\vote.png' width=auto height="500px" >
         </div>

@@ -15,3 +15,5 @@ def vote(request):
 	return render(request, "vote.html")
 def mypage(request):
 	return render(request, "mypage.html")
+def makeVote(request):
+	return render(request, "makeVote.html")
