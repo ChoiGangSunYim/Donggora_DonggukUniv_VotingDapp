@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
+from django.core.mail import EmailMessage
 from rest_framework import viewsets
 from rest_framework.parsers import JSONParser
 from .serializer import UserSerializer, PollSerializer, VoteSerializer
@@ -101,3 +102,8 @@ def findpw(request):
 
 def makeVote(request):
 	return render(request, "makeVote.html")
+
+
+def sendEmail(request):
+	email = EmailMessage('Django Mail', 'Django로 발송한 메일입니다.', to=['tjswls602@gmail.com'])
+	email.send()

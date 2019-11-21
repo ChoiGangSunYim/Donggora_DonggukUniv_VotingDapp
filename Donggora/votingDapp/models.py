@@ -93,6 +93,8 @@ class Poll(models.Model):
     pros = models.IntegerField(default=0)
     cons = models.IntegerField(default=0)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    contract = models.CharField(max_length=255)
+    abi = models.CharField(max_length=255)
     # candidate
 
 
