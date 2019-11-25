@@ -103,7 +103,13 @@ def findpw(request):
 def makeVote(request):
 	return render(request, "makeVote.html")
 
+@login_required(login_url='/login/')
+def vote_specifications(request):
+	return render(request, "vote_specifications.html")
 
 def sendEmail(request):
-	email = EmailMessage('Django Mail', 'Django로 발송한 메일입니다.', to=['tjswls602@gmail.com'])
+	title = ''
+	content = ''
+	receiver = ''
+	email = EmailMessage(title, content, to=[receiver])
 	email.send()

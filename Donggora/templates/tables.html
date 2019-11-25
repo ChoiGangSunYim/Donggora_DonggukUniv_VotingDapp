@@ -29,22 +29,120 @@
   </ul>
 
   <div id="content-wrapper" style="text-align:center">
-    <h2>투표 결과 조회</h2>
-    <hr>
-    <p class="lead">학생회관 엘리베이터 개선 찬반 투표</p>
-    <progress value="20" max="100"></progress>&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="button" value="투표하러 가기" onclick="location.href='{% url 'vote' %}'">
-    <hr>
-    <p class="lead">신공학관 화장실 청결 문제 투표</p>
-      <progress value="30" max="100"></progress>&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="button" value="투표하러 가기" onclick="location.href='{% url 'vote' %}'">
-    <hr>
-    <p class="lead">그냥 투표</p>
-      <progress value="40" max="100"></progress>&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="button" value="투표하러 가기" onclick="location.href='{% url 'vote' %}'">
-    <hr>
-    <p class="lead">아몰랑랑</p>
-      <progress value="50" max="100"></progress>&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="button" value="투표하러 가기" onclick="location.href='{% url 'vote' %}'">
+    <!-- DataTables Example -->
+    <div class="card mb-3">
+      <div class="card-header">
+        <i class="fas fa-table"></i>투표 조회
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>투표 제목</th>
+                <th>구분</th>
+                <th>투표 작성자</th>
+                <th>투표 참여자 수</th>
+                <th>투표 현황</th>
+                <th>시작/종료</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th>투표 제목</th>
+                <th>구분</th>
+                <th>투표 작성자</th>
+                <th>투표 참여자 수</th>
+                <th>투표 현황</th>
+                <th>시작/종료</th>
+              </tr>
+            </tfoot>
+            <tbody>
+              <div class="list-group">
+                <tr>
+                  <td>
+                  <a href="{% url 'vote_specifications'%}" class="list-group-item list-group-item-action">헐떡고개에 에스컬레이터 설치해주세요</a>
+                  </td>
+                  <td>시설</td>
+                  <td>영은</td>
+                  <td>22명</td>
+                  <td style="text-align : center; vertical-align : middle;">
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                        60%
+                      </div>
+                    </div>
+                    <input type="button" style="margin-top : 10px;" value="투표하러 가기" onclick="location.href='{% url 'vote' %}'">
+                  </td>
+                  <td>0921/1022</td>
+                  </td>
+                </tr>
+              </div>
+              <div class="list-group">
+                <tr>
+                  <td>
+                  <a href="{% url 'vote_specifications' %}" class="list-group-item list-group-item-action">신공화장실 깨끗하게 해주세요.</a>
+                  </td>
+                  <td>시설</td>
+                  <td>태혁</td>
+                  <td>333명</td>
+                  <td style="text-align : center; vertical-align : middle;">
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;">
+                        70%
+                      </div>
+                    </div>
+                    <input type="button" style="margin-top : 10px;" value="투표하러 가기" onclick="location.href='{% url 'vote' %}'">
+                  </td>
+                  <td>0921/1022</td>
+                  </td>
+                </tr>
+              </div>
+              <div class="list-group">
+                <tr>
+                  <td>
+                  <a href="{% url 'vote_specifications' %}" class="list-group-item list-group-item-action">기숙사 밥 맛있게 해주세요.</a>
+                  </td>
+                  <td>시설</td>
+                  <td>선진</td>
+                  <td>775명</td>
+                  <td style="text-align : center; vertical-align : middle;">
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
+                        30%
+                      </div>
+                    </div>
+                    <input type="button" style="margin-top : 10px;" value="투표하러 가기" onclick="location.href='{% url 'vote' %}'">
+                  </td>
+                  <td>0921/1022</td>
+                  </td>
+                </tr>
+              </div>
+              <div class="list-group">
+                <tr>
+                  <td>
+                  <a href="{% url 'vote_specifications' %}" class="list-group-item list-group-item-action">도서관 출입 편하게 해주세요.</a>
+                  </td>
+                  <td>시설</td>
+                  <td>주희</td>
+                  <td>534명</td>
+                  <td style="text-align : center; vertical-align : middle;">
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+                        50%
+                      </div>
+                    </div>
+                    <input type="button" style="margin-top : 10px;" value="투표하러 가기" onclick="location.href='{% url 'vote' %}'">
+                  </td>
+                  <td>0921/1022</td>
+                  </td>
+                </tr>
+              </div>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+    </div>
   </div>
 {% endblock %}

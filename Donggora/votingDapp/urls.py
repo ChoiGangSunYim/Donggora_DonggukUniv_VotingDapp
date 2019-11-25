@@ -23,4 +23,5 @@ urlpatterns = [
     path('findpw', views.findpw, name='findpw'),
     path('tables', views.tables, name='tables'),
     path('makeVote', views.makeVote, name='makeVote'),
+    path('vote_specifications', views.vote_specifications, name='vote_specifications'),
 ]
