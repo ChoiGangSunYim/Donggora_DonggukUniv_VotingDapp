@@ -1,39 +1,65 @@
 {% extends 'base.html' %}
 {% block body %}
+
 <div id="wrapper">
-  <div id="content-wrapper">
-    <div class="container-fluid">
+  <!-- Sidebar -->
+  <ul class="sidebar navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'main' %}">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>메인</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'mypage' %}">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>마이페이지</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'tables' %}">
+        <i class="fas fa-fw fa-chart-area"></i>
+        <span>전체 투표 항목 조회</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'vote' %}">
+        <i class="fas fa-fw fa-table"></i>
+        <span>투표생성</span></a>
+    </li>
+  </ul>
 
-    <!-- Page Content -->
-    <div class="view_made" style=" text-align: center; height:900px width:auto" >
-      <h5>아직 만든 투표가 존재하지 않습니다.</h5>
-      <div class="exp1_white" >
+  <div id="content-wrapper" style="text-align:center; margin : 100px auto; width : 40%">
+    <h2>내가 만든 투표</h2>
+    <p class="lead">학생회관 엘리베이터 개선 찬반 투표</p>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
+        10%
       </div>
-      <hr>
     </div>
-    <div class="voted" style=" text-align: center; height:900px width:auto" >
-      <h5>아직 참여한 투표가 존재하지 않습니다</h5>
-      <a href="{%url 'vote'%}">투표 생성하러가기</a>
-      <div class="exp1_white">
+    <input type="button" style="margin-top : 10px;" value="자세히 보기" onclick="location.href='{% url 'vote_specifications' %}'">
+    <p class="lead">신공학관 화장실 청결 문제 투표</p>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;">
+        90%
       </div>
-      <hr>
     </div>
-
+    <input type="button" style="margin-top : 10px;" value="자세히 보기" onclick="location.href='{% url 'vote_specifications' %}'">
+    <hr>
+    <h2>내가 한 투표</h2>
+    <p class="lead">기숙사식당 개선 찬반 투표</p>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
+        30%
+      </div>
+    </div>
+    <input type="button" style="margin-top : 10px;" value="자세히 보기" onclick="location.href='{% url 'vote_specifications' %}'">
+    <p class="lead">도서관 출입 개선 찬반 투표</p>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;">
+        70%
+      </div>
+    </div>
+    <input type="button" style="margin-top : 10px;" value="자세히 보기" onclick="location.href='{% url 'vote_specifications' %}'">
   </div>
-  <!-- /.container-fluid -->
-
-  <!-- Sticky Footer -->
-  <footer class="sticky-footer">
-    <div class="container my-auto">
-      <div class="copyright text-center my-auto">
-        <span>Copyright © ChoiKangSunYim 2019</span>
-      </div>
-    </div>
-  </footer>
-
 </div>
-<!-- /.content-wrapper -->
-
-</div>
-<!-- /#wrapper -->
 {% endblock %}

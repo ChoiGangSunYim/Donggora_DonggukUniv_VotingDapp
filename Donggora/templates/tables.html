@@ -1,172 +1,134 @@
 {% extends 'base.html' %}
 {% block body %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
+<div id="wrapper">
+  <!-- Sidebar -->
+  <ul class="sidebar navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="{%url 'main' %}">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>메인</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{%url 'mypage' %}">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>마이페이지</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'tables' %}">
+        <i class="fas fa-fw fa-chart-area"></i>
+        <span>전체 투표 항목 조회</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'vote' %}">
+        <i class="fas fa-fw fa-table"></i>
+        <span>투표생성</span></a>
+    </li>
+  </ul>
 
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>동고라</title>
-
-
-</head>
-
-<body id="page-top">
-
-  <div id="wrapper">
-
-    <div id="content-wrapper">
-
-      <div class="container-fluid">
-
-        <!-- Breadcrumbs-->
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="#">Dashboard</a>
-          </li>
-          <li class="breadcrumb-item active">Tables</li>
-        </ol>
-
-        <!-- DataTables Example -->
-        <div class="card mb-3">
-          <div class="card-header">
-            <i class="fas fa-table"></i>
-            Data Table Example</div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                  <tr>
-                    <th>투표 제목</th>
-                    <th>구분</th>
-                    <th>투표 작성자</th>
-                    <th>투표 참여자 수</th>
-                    <th>시작 일자</th>
-                    <th>종료 일자</th>
-                  </tr>
-                </thead>
-                <tfoot>
-                  <tr>
-                    <th>투표 제목</th>
-                    <th>구분</th>
-                    <th>투표 작성자</th>
-                    <th>투표 참여자 수</th>
-                    <th>시작 일자</th>
-                    <th>종료 일자</th>
-                  </tr>
-                </tfoot>
-                <tbody>
-                  <div class="list-group">
-                    <tr>
-                      <td>
-                      <a href="{%url 'vote_specifications'%}" class="list-group-item list-group-item-action">헐떡고개에 에스컬레이터 설치해주세요</a>
-                      <td>시설</td>
-                      <td>영은</td>
-                      <td>0명</td>
-                      </td>
-                    </tr>
-                  </div>
-
-                  <tr>
-                    <td>Tiger Nixon</td>
-                    <td>System Architect</td>
-                    <td>Edinburgh</td>
-                    <td>61</td>
-                    <td>2011/04/25</td>
-                    <td>$320,800</td>
-                  </tr>
-                  <tr>
-                    <td>Garrett Winters</td>
-                    <td>Accountant</td>
-                    <td>Tokyo</td>
-                    <td>63</td>
-                    <td>2011/07/25</td>
-                    <td>$170,750</td>
-                  </tr>
-                  <tr>
-                    <td>Ashton Cox</td>
-                    <td>Junior Technical Author</td>
-                    <td>San Francisco</td>
-                    <td>66</td>
-                    <td>2009/01/12</td>
-                    <td>$86,000</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-        </div>
-
-        <p class="small text-center text-muted my-5">
-          <em>More table examples coming soon...</em>
-        </p>
-
+  <div id="content-wrapper" style="text-align:center">
+    <!-- DataTables Example -->
+    <div class="card mb-3">
+      <div class="card-header">
+        <i class="fas fa-table"></i>투표 조회
       </div>
-      <!-- /.container-fluid -->
-
-      <!-- Sticky Footer -->
-      <footer class="sticky-footer">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>Copyright © Your Website 2019</span>
-          </div>
-        </div>
-      </footer>
-
-    </div>
-    <!-- /.content-wrapper -->
-
-  </div>
-  <!-- /#wrapper -->
-
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
-
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>투표 제목</th>
+                <th>구분</th>
+                <th>투표 작성자</th>
+                <th>투표 참여자 수</th>
+                <th>투표 현황</th>
+                <th>시작/종료</th>
+              </tr>
+            </thead>
+            <tbody>
+              <div class="list-group">
+                <tr>
+                  <td>
+                  <a href="{% url 'vote_specifications'%}" class="list-group-item list-group-item-action">헐떡고개에 에스컬레이터 설치해주세요</a>
+                  </td>
+                  <td>시설</td>
+                  <td>영은</td>
+                  <td>22명</td>
+                  <td style="text-align : center; vertical-align : middle;">
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                        60%
+                      </div>
+                    </div>
+                  </td>
+                  <td>0921/1022</td>
+                  </td>
+                </tr>
+              </div>
+              <div class="list-group">
+                <tr>
+                  <td>
+                  <a href="{% url 'vote_specifications' %}" class="list-group-item list-group-item-action">신공화장실 깨끗하게 해주세요.</a>
+                  </td>
+                  <td>시설</td>
+                  <td>태혁</td>
+                  <td>333명</td>
+                  <td style="text-align : center; vertical-align : middle;">
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;">
+                        70%
+                      </div>
+                    </div>
+                  </td>
+                  <td>0921/1022</td>
+                  </td>
+                </tr>
+              </div>
+              <div class="list-group">
+                <tr>
+                  <td>
+                  <a href="{% url 'vote_specifications' %}" class="list-group-item list-group-item-action">기숙사 밥 맛있게 해주세요.</a>
+                  </td>
+                  <td>시설</td>
+                  <td>선진</td>
+                  <td>775명</td>
+                  <td style="text-align : center; vertical-align : middle;">
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
+                        30%
+                      </div>
+                    </div>
+                  </td>
+                  <td>0921/1022</td>
+                  </td>
+                </tr>
+              </div>
+              <div class="list-group">
+                <tr>
+                  <td>
+                  <a href="{% url 'vote_specifications' %}" class="list-group-item list-group-item-action">도서관 출입 편하게 해주세요.</a>
+                  </td>
+                  <td>시설</td>
+                  <td>주희</td>
+                  <td>534명</td>
+                  <td style="text-align : center; vertical-align : middle;">
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+                        50%
+                      </div>
+                    </div>
+                  </td>
+                  <td>0921/1022</td>
+                  </td>
+                </tr>
+              </div>
+            </tbody>
+          </table>
         </div>
       </div>
+      <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
     </div>
   </div>
-
-  <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Page level plugin JavaScript-->
-  <script src="vendor/datatables/jquery.dataTables.js"></script>
-  <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin.min.js"></script>
-
-  <!-- Demo scripts for this page-->
-  <script src="js/demo/datatables-demo.js"></script>
-
-</body>
-
-</html>
 {% endblock %}

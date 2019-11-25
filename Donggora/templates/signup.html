@@ -1,85 +1,76 @@
-{% extends 'base.html' %}
+﻿{% extends 'base.html' %}
 {% block body %}
-﻿<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>SB Admin - Register</title>
-
-  <!-- Custom fonts for this template-->
-  <link href="all.min.css" rel="stylesheet" type="text/css">
-
-  <!-- Custom styles for this template-->
-  <link href="sb-admin.css" rel="stylesheet">
-
-</head>
-
 <body class="bg-dark">
-
   <div class="container">
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">회원가입</div>
       <div class="card-body">
-        <form>
+        <form action="{% url 'signup' %}" method="POST">
+          {% csrf_token %}
           <div class="form-group">
             <div class="form-label-group">
-                  <input type="text" id="firstName" class="form-control" placeholder="First name" required="required" autofocus="autofocus">
+                  <input name="username" type="text" id="firstName" class="form-control" placeholder="First name" required="required" autofocus="autofocus">
                   <label for="firstName">이름 입력</label>
             </div>
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="required">
-              <label for="inputEmail">학번 입력</label>
+              <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required="required">
+              <label for="inputEmail">이메일 입력</label>
             </div>
           </div>
           <div class="form-group">
-            <div class="form-label-group">
-                  <input type="text" id="lastName" class="form-control" placeholder="Last name" required="required">
-                  <label for="lastName">아이디 입력</label>
+              <div class="form-label-group">
+                    <input name="phone" type="text" id="phone" class="form-control" placeholder="phone" required="required" autofocus="autofocus">
+                    <label for="phone">핸드폰 번호 입력</label>
+              </div>
             </div>
+          <div class="input-group mb-3">
+            <select name="gender" class="custom-select" id="inputGroupSelect01">
+              <option value="남자">남자</option>
+              <option value="여자">여자</option>
+            </select>
+          </div>
+          <div class="input-group mb-3">
+            <select name="department" class="custom-select" id="inputGroupSelect01">
+              <option value="문과대학">문과대학</option>
+              <option value="이과대학">이과대학</option>
+              <option value="불교대학">불교대학</option>
+              <option value="법과대학">법과대학</option>
+              <option value="사회과학대학">사회과학대학</option>
+              <option value="경찰사법대학">경찰사법대학</option>
+              <option value="경영대학">경영대학</option>
+              <option value="바이오시스템대학">바이오시스템대학</option>
+              <option value="공과대학">공과대학</option>
+              <option value="사범대학">사범대학</option>
+              <option value="예술대학">예술대학</option>
+              <option value="약학대학">약학대학</option>
+              <option value="미래융합대학">미래융합대학</option>
+            </select>
           </div>
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
+                  <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
                   <label for="inputPassword">비밀번호 입력</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm password" required="required">
+                  <input name="password2" type="password" id="confirmPassword" class="form-control" placeholder="Confirm password" required="required">
                   <label for="confirmPassword">비밀번호 확인</label>
                 </div>
               </div>
             </div>
           </div>
-          <a class="btn btn-primary btn-block" href="로그인.html">등록</a>
+          <button type="submit" class="btn btn-primary btn-block">등록</button>
         </form>
         <div class="text-center">
-          <a class="d-block small mt-3" href="로그인.html">로그인 화면</a>
-          <a class="d-block small" href="비밀번호 찾기.html">비밀번호 찾기</a>
+          <a class="d-block small" href="/findpw">비밀번호 찾기</a>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- Bootstrap core JavaScript-->
-  <script src="jquery.min.js"></script>
-  <script src="bootstrap.bundle.min.js"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="jquery.easing.min.js"></script>
-
 </body>
-
-</html>
 {% endblock %}

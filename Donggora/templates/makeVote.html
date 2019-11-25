@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% block body %}
+<style media="screen">
+  * {
+    box-sizing: border-box;
+    }
+</style>
+
+<div id="wrapper">
+  <!-- Sidebar -->
+  <ul class="sidebar navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'main' %}">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>메인</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'mypage' %}">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>마이페이지</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'tables' %}">
+        <i class="fas fa-fw fa-chart-area"></i>
+        <span>전체 투표 항목 조회</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'makeVote' %}">
+        <i class="fas fa-fw fa-table"></i>
+
+    </li>
+  </ul>
+
+  <div id="content-wrapper" style="text-align:center;  margin-left : 100px; margin-right : 100px;">
+    <hr>
+
+
+    <main>
+      <div class="inner-wrapper sml">
+        <div class="form-wrapper">
+          <header class="form-wrapper">
+            <h1>Create a poll</h1>
+            <p>Complete the below to create your poll</p>
+          </header>
+          <form action=" " method="post" name="form" target="_self" id="poll-form" nonvalidate="nonvalidate">
+            <div class="imput-group">
+              <div class="input-group mb-3">
+                 <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">Poll Question</span>
+                  </div>
+                  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+              </div>
+            </div>
+            <div class="poll-questions">
+              <hr>
+              <header class="form-wrapper">
+                <h5>Poll Options</h5>
+                <p>Click on the buttons to register</p>
+              </header>
+              <div class="input-group">
+                <p>Poll Option1</p>
+                <h5 class="list-group-item list-group-item-action list-group-item-success">찬성 후보 등록</h5>
+                <p>Poll Option2</p>
+                <h5 class="list-group-item list-group-item-action list-group-item-danger">반대 후보 등록</h5>
+
+              </div>
+            </div>
+
+            <div class="poll-cat">
+            <hr>
+            <header class="form-wrapper">
+              <h5>Poll Categories</h5>
+              <p>Click on below to choose category of the poll</p>
+            </header>
+
+            <div class="form-divide"></div>
+            <div class="input-group split-field-left">
+              <div class="form-divide"></div>
+              <div class="btn-group">
+             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+              ------------------Choose a Category-----------------
+             </button>
+              <div class="dropdown-menu dropdown-menu-lg-right">
+               <button class="dropdown-item" type="button">학사제도</button>
+               <button class="dropdown-item" type="button">시설</button>
+               <button class="dropdown-item" type="button">교직원</button>
+             </div>
+           </div>
+           </div>
+
+           <div class="poll-cat">
+           <hr>
+           <header class="form-wrapper">
+             <h5>Poll Specifications</h5>
+             <p>Write down the Specifications of the poll down below in the textbox.</p>
+           </header>
+           <br></br>
+           <textarea cols="40" rows="10"></textarea><br>
+
+           <hr>
+           <div class="poll-date">
+             <div class="poll-inner-div">
+               <header class="form-wrapper">
+                 <h5>Poll Date</h5>
+                 <p>Select Validation Date of the poll.</p>
+               </header>
+               <div class="container">
+    <div class="row">
+        <div class='col-sm-6'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
+    </div>
+</div>
+
+
+              </div>
+           </div>
+
+
+           <hr>
+           <div class="poll-email">
+             <div class="poll-create-inner-options">
+               <div class="input-group">
+                 <p>
+                   <input type="checkbox" value="1">
+                   <label for="poll_multiple_votes">
+                     <strong>Get E-Mail</strong>
+                     -Allow to recieve E-Mail when vote terminates
+                   </label>
+                </div>
+              </div>
+           </div>
+           <button type="button" class="btn btn-success">생성하기</button>
+
+          </form>
+        </div>
+      </div>
+    </main>
+
+
+
+  </div>
+</div>
+{% endblock %}

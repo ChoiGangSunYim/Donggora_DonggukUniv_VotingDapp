@@ -10,10 +10,22 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
-import os
+import os, json
+from django.core.exceptions import ImproperlyConfigured
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+secret_file = os.path.join(BASE_DIR, 'secret.json') # secret.json 파일 위치를 명시
+with open(secret_file) as f:
+    secrets = json.loads(f.read())
+
+def get_secret(setting, secrets=secrets):
+    """비밀 변수를 가져오거나 명시적 예외를 반환한다."""
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = "Set the {} environment variable".format(setting)
+        raise ImproperlyConfigured(error_msg)
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'votingDapp',
 ]
 
@@ -121,3 +134,15 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/') 
 STATIC_URL = '/static/' 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+AUTH_USER_MODEL = "votingDapp.User"
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = 'donggoracontact@gmail.com'
+EMAIL_HOST_PASSWORD = get_secret('email_host_password')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+SERVER_EMAIL = 'donggoracontact@gmail.com'
+DEFAULT_FROM_MAIL = 'donggoracontact'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

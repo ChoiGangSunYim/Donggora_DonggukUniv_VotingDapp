@@ -334,4 +334,8 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+venv/
+__pycache__/
+db.sqlite3/
+secret.json
 # End of https://www.gitignore.io/api/macos,python,django,windows,solidity,soliditytruffle
