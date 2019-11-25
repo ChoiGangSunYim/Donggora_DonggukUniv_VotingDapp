@@ -39,7 +39,7 @@ def create(request):
 	if request.method == "GET": # 투표생성 화면 띄워주기
 		return render(request, "vote.html")
 	elif request.method == "POST": # 투표생성 처리
-		return redirect('index')
+		return redirect('main')
 
 
 def login(request):
@@ -54,7 +54,7 @@ def login(request):
 		if user is not None:
 			if user.is_active:
 				auth_login(request, user)
-				return redirect('index')
+				return redirect('main')
 
 		ctx = {'error': '회원 정보가 맞지 않습니다'}
 		return render(request, "login.html", ctx)
@@ -62,7 +62,7 @@ def login(request):
 
 def logout(request):
 	auth_logout(request)
-	return redirect('index')
+	return redirect('main')
 
 
 def signup(request):
