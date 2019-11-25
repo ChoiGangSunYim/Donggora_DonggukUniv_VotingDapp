@@ -85,6 +85,7 @@ def signup(request):
 		serializer = UserSerializer(data=data)
 		if serializer.is_valid():
 			serializer.save()
+			return redirect('main')
 		else:
 			print(serializer.errors)
 			return HttpResponse(status=400)
