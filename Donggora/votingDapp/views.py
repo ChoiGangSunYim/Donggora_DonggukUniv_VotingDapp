@@ -35,10 +35,20 @@ def polls(request):
 
 
 @login_required(login_url='/login/')
-def create(request):
+def vote(request):
 	if request.method == "GET": # 투표생성 화면 띄워주기
 		return render(request, "vote.html")
 	elif request.method == "POST": # 투표생성 처리
+		title = request.POST.get('', '')
+		content = request.POST.get('', '')
+		# receiver = 
+		
+		# def _sendEmail(title, content, receiver):
+		# 	email = EmailMessage(title, content, to=[receiver])
+		# 	email.send()
+
+		# _sendEmail(title, content, receiver)
+
 		return redirect('main')
 
 
@@ -86,11 +96,6 @@ def mypage(request):
 
 
 @login_required(login_url='/login/')
-def vote(request):
-	return render(request, "vote.html")
-
-
-@login_required(login_url='/login/')
 def tables(request):
 	return render(request, "tables.html")
 
@@ -100,16 +105,6 @@ def findpw(request):
 	return render(request, "findpw.html")
 
 
-def makeVote(request):
-	return render(request, "makeVote.html")
-
 @login_required(login_url='/login/')
 def vote_specifications(request):
 	return render(request, "vote_specifications.html")
-
-def sendEmail(request):
-	title = ''
-	content = ''
-	receiver = ''
-	email = EmailMessage(title, content, to=[receiver])
-	email.send()

@@ -3,11 +3,13 @@
 <div id="wrapper">
 
   <div id="content-wrapper" style="text-align:center; border : 3px solid gold; margin-left : 100px; margin-right : 100px; margin-top : 100px;">
-    <h2>투표 만들기</h2><hr>
-    제목 : <input type="text"></label><br>
-    내용<br>
-    <textarea cols="40" rows="8"></textarea><br>
-    <input type="button" value="확인" onclick="location.href='{% url 'main' %}'">
+    <form action="{% url 'vote' %}" method="POST">
+      <h2>투표 만들기</h2><hr>
+      제목 : <input type="text"></label><br>
+      내용<br>
+      <textarea cols="40" rows="8"></textarea><br>
+      <input type="button" value="확인" onclick="location.href='{% url 'main' %}'">
+    </form>
   </div>
 </div>
 {% endblock %}
