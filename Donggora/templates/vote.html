@@ -26,15 +26,35 @@
         <span>투표생성</span></a>
     </li>
   </ul>
-  
+
   <div id="content-wrapper" style="text-align:center; border : 3px solid gold; margin-left : 100px; margin-right : 100px; margin-top : 100px;">
     <form action="{% url 'vote' %}" method="POST">
       <h2>투표 만들기</h2><hr>
+      {% csrf_token %}
       제목 : <input type="text" name="title"></label><br>
       내용<br>
       <textarea cols="40" rows="8" name="content"></textarea><br>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">카테고리</label>
+        </div>
+        <select name="category" class="custom-select" id="inputGroupSelect01">
+          <option value="시설">시설</option>
+          <option value="학사제도">학사제도</option>
+          <option value="교직원">교직원</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">투표 유효 기간</span>
+        </div>
+        <input name="year" type="text" aria-label="연" class="form-control" placeholder="연(ex:2019)">
+        <input name="month" type="text" aria-label="월" class="form-control" placeholder="월(ex:08)">
+        <input name="day" type="text" aria-label="일" class="form-control" placeholder="일(ex:01)">
+        </div>
       <input type="submit" value="확인">
     </form>
+    <!-- fields = ['title', 'content', 'valid_until', 'category'] -->
   </div>
 </div>
 {% endblock %}

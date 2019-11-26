@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.contrib.postgres.fields import ArrayField
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None):
@@ -34,6 +35,8 @@ class Department(models.Model):
               ("예술대학", "예술대학"),
               ("약학대학", "약학대학"),
               ("미래융합대학", "미래융합대학")]
+
+              
 
     name = models.CharField(max_length=20, choices=college)
 
@@ -86,6 +89,7 @@ class Comment(models.Model):
 
 
 class Poll(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     content = models.TextField()
     created_at = models.DateField(auto_now_add=True)
@@ -93,9 +97,8 @@ class Poll(models.Model):
     pros = models.IntegerField(default=0)
     cons = models.IntegerField(default=0)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    contract = models.CharField(max_length=255)
-    # user_list = models.ArrayField()
-    # candidate
+    contract = models.CharField(max_length=255, blank=True, null=True)
+    # restriction = ArrayField(models.IntegerField(max_length=2, blank=True), size=8)
 
 
 class Vote(models.Model):

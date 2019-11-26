@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from .models import Poll, Vote
+from .models import Poll, Vote, Comment
 User = get_user_model()
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -18,11 +18,16 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         return instance
 
 
+class CommentSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ['content']
+
 
 class PollSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Poll
-        fields = ['email', 'password']
+        fields = ['author', 'title', 'content', 'valid_until', 'category']
 
 
 class VoteSerializer(serializers.HyperlinkedModelSerializer):

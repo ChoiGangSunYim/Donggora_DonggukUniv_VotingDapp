@@ -21,4 +21,5 @@ urlpatterns = [
     path('vote', views.vote, name='vote'),
     path('vote_specifications/<int:id>', views.vote_specifications, name='vote_specifications'),
     path('tables', views.tables, name='tables'),
+    path('comment', views.comment, name='comment'),
 ]

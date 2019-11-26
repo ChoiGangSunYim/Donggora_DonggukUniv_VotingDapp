@@ -36,8 +36,22 @@ def vote(request):
 	if request.method == "GET": # 투표생성 화면 띄워주기
 		return render(request, "vote.html")
 	elif request.method == "POST": # 투표생성 처리
-		title = request.POST.get('', '')
-		content = request.POST.get('', '')
+		data = request.POST.dict()
+		del data['csrfmiddlewaretoken']
+		data['valid_until'] = data['year'] + '-' + data['month'] + '-' + data['day']
+		del data['year']
+		del data['month']
+		del data['day']
+
+		print(data)
+		serializer = PollSerializer(data=data)
+		if serializer.is_valid():
+			serializer.save()
+			return redirect('main')
+		else:
+			print(serializer.errors)
+			return HttpResponse(status=400)
+
 		# id = request.POST.get('id', '')
 		# url = '\n 투표에 참여하시려면 클릭하세요 => ' + f'http://localhost:8000/vote_specifications/{id}'
 		# content+=url
@@ -46,11 +60,11 @@ def vote(request):
 		# array[index]
 		# index+=1
 		
-		def _sendEmail(title, content):
-			email = EmailMessage(title, content, to=['donggoracontact@gmail.com'])
-			email.send()
+		# def _sendEmail(title, content):
+		# 	email = EmailMessage(title, content, to=['donggoracontact@gmail.com'])
+		# 	email.send()
 
-		_sendEmail(title, content)
+		# _sendEmail(title, content)
 
 		return redirect('main')
 
@@ -102,6 +116,7 @@ def mypage(request):
 @login_required(login_url='/login/')
 def tables(request):
 	polls = Poll.objects.all()
+
 	ctx = {
 		'polls': polls
 	}
@@ -128,9 +143,25 @@ def findpw(request):
 
 @login_required(login_url='/login/')
 def vote_specifications(request, id):
-	poll = Poll.objects.filter(id)
+	poll = Poll.objects.filter(id=id)
 	ctx = {
 		'poll': poll
 	}
 
-	return render(request, "vote_specifications.html", ctx)
+	return render(request, "vote_specifications.html")
+
+
+@login_required(login_url='/login/')
+def comment(request):
+	if request.method == 'POST':
+		content = request.POST.get('content', '')
+		data = request.POST.dict()
+		del data['csrfmiddlewaretoken']
+		print(data)
+		serializer = CommentSerializer(data=data)
+		if serializer.is_valid():
+			serializer.save()
+			return redirect('vote_specifications')
+		else:
+			print(serializer.errors)
+			return HttpResponse(status=400)
