@@ -21,7 +21,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class CommentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Comment
-        fields = ['content']
+        fields = ['author', 'content', 'poll']
 
 
 class PollSerializer(serializers.HyperlinkedModelSerializer):

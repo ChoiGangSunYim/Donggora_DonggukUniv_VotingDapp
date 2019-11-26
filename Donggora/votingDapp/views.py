@@ -7,8 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
 from rest_framework import viewsets
 from rest_framework.parsers import JSONParser
-from .serializer import UserSerializer, PollSerializer, VoteSerializer
-from .models import Poll, Vote
+from .serializer import UserSerializer, PollSerializer, VoteSerializer, CommentSerializer
+from .models import Poll, Vote, Comment
 User = get_user_model()
 
 def main(request):
@@ -144,19 +144,23 @@ def findpw(request):
 @login_required(login_url='/login/')
 def vote_specifications(request, id):
 	poll = Poll.objects.filter(id=id)
+	comments = Comment.objects.filter(poll=id)
+
 	ctx = {
-		'poll': poll
+		'poll': poll,
+		'comments': comments
 	}
 
-	return render(request, "vote_specifications.html")
+	return render(request, "vote_specifications.html", ctx)
 
 
 @login_required(login_url='/login/')
-def comment(request):
+def comment(request, poll_id):
 	if request.method == 'POST':
 		content = request.POST.get('content', '')
 		data = request.POST.dict()
 		del data['csrfmiddlewaretoken']
+		data['poll'] = poll_id
 		print(data)
 		serializer = CommentSerializer(data=data)
 		if serializer.is_valid():

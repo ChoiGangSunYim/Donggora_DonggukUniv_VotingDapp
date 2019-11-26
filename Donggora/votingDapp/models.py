@@ -36,17 +36,21 @@ class Department(models.Model):
               ("약학대학", "약학대학"),
               ("미래융합대학", "미래융합대학")]
 
-              
-
     name = models.CharField(max_length=20, choices=college)
 
+    def __str__(self):
+        return self.name
 
-class Category(models.Model):
+
+class Category(models.Model):        
     category = [("학사제도", "학사제도"),
             ("시설", "시설"),
             ("교직원", "교직원")]
 
     name = models.CharField(max_length=20, choices=category)
+
+    def __str__(self):
+        return self.name
 
 
 class User(AbstractBaseUser):
@@ -80,13 +84,6 @@ class User(AbstractBaseUser):
         return self.is_admin
 
 
-class Comment(models.Model):
-    content = models.TextField()
-    like = models.IntegerField(default=0)
-    dislike = models.IntegerField(default=0)
-    created_at = models.DateField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-
 
 class Poll(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -100,8 +97,25 @@ class Poll(models.Model):
     contract = models.CharField(max_length=255, blank=True, null=True)
     # restriction = ArrayField(models.IntegerField(max_length=2, blank=True), size=8)
 
+    def __str__(self):
+        return self.title
+
+class Comment(models.Model):
+    content = models.TextField()
+    like = models.IntegerField(default=0)
+    dislike = models.IntegerField(default=0)
+    created_at = models.DateField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    poll = models.ForeignKey(Poll, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.content
+
 
 class Vote(models.Model):
     created_at = models.DateField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     poll = models.ForeignKey(Poll, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.poll

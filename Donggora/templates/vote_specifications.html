@@ -29,14 +29,18 @@
 
   <div id="content-wrapper" style="margin-left : 100px; margin-right : 100px;">
     <h1><b>투표 상세 내용</b></h1><br>
-    <h2>안건 : 신공화장실 청결 문제 해결</h2>
-    <p>상세 내용 : 현재 너무 신공 화장실이 더러워서 화장실 가기가 꺼려진다. 리모델링이 필요하다.</p>
-    <p style="margin-top:45px;">그러기 위해서 우리는 ....</p>
+      {% for poll in poll %}
+        {{poll.id}}
+        <h2>안건: {{ poll.title }}</h2>
+        <p>작성자: {{ poll.author }}</p>
+        <p>카테고리: {{ poll.category }}</p>
+        <p>내용: {{ poll.content }}</p>
 
-    <div style="text-align : center;">
-      <input type="button" value=" 찬성 ">&nbsp;&nbsp;&nbsp;
-      <input type="button" value=" 반대 ">
-    </div>
+        <div style="text-align : center;">
+          찬성수: {{ poll.pros }}<input type="button" value=" 찬성 ">&nbsp;&nbsp;&nbsp;
+          반대수: {{ poll.cons }}<input type="button" value=" 반대 ">
+        </div>
+      {% endfor %}
 
     <form action="{% url 'comment' %}" method="POST">
       {% csrf_token %}
@@ -46,11 +50,12 @@
         <input type="submit" value=" 확인 ">
       </div>
     </form>
+
     {% if comments %}
       {% for comment in comments %}
       <div style="border: 5px ridge grey;">
         <div>
-          {{ comment.title }}
+          {{ comment.author }}
         </div>
         <div>
           {{ comment.content }}
