@@ -48,10 +48,35 @@
               </tr>
             </thead>
             <tbody>
+              {% for poll in polls %}
+                <div class="list-group">
+                  <tr>
+                    <td>
+                    <a href="{% url 'vote_specifications' id=poll.id %}" class="list-group-item list-group-item-action">{{ poll.title }}</a>
+                    </td>
+                    <td>{{ poll.category }}</td>
+                    <td>{{ poll.user }}</td>
+                    <td>{{ poll.pros }}</td>
+                    <td>{{ poll.cons }}</td>
+                    <td>{{ poll.created_at }}</td>
+                    <td>{{ poll.valid_until }}</td>
+                    <td style="text-align : center; vertical-align : middle;">
+                      <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;">
+                          70%
+                        </div>
+                      </div>
+                      <input type="button" style="margin-top : 10px;" value="투표하러 가기" onclick="location.href='{% url 'vote' %}'">
+                    </td>
+                    <td>0921/1022</td>
+                    </td>
+                  </tr>
+                </div>
+              {% endfor %}
               <div class="list-group">
                 <tr>
                   <td>
-                  <a href="{% url 'vote_specifications'%}" class="list-group-item list-group-item-action">헐떡고개에 에스컬레이터 설치해주세요</a>
+                  <a href="{% url 'vote_specifications' pk=%}" class="list-group-item list-group-item-action">헐떡고개에 에스컬레이터 설치해주세요</a>
                   </td>
                   <td>시설</td>
                   <td>영은</td>

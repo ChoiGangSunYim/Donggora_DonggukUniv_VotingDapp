@@ -18,8 +18,7 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('mypage', views.mypage, name='mypage'),
     path('findpw', views.findpw, name='findpw'),
-    path('polls/', views.polls, name='polls'),
     path('vote', views.vote, name='vote'),
-    path('vote_specifications', views.vote_specifications, name='vote_specifications'),
+    path('vote_specifications/<int:id>', views.vote_specifications, name='vote_specifications'),
     path('tables', views.tables, name='tables'),
 ]

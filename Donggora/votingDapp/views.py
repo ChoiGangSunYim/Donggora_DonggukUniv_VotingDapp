@@ -29,10 +29,7 @@ class VoteViewSet(viewsets.ModelViewSet):
     queryset = Vote.objects.all()
     serializer_class = VoteSerializer
 
-
-def polls(request):
-	return render(request, "vote.html")
-
+index = 0
 
 @login_required(login_url='/login/')
 def vote(request):
@@ -41,13 +38,19 @@ def vote(request):
 	elif request.method == "POST": # 투표생성 처리
 		title = request.POST.get('', '')
 		content = request.POST.get('', '')
-		# receiver = 
-		
-		# def _sendEmail(title, content, receiver):
-		# 	email = EmailMessage(title, content, to=[receiver])
-		# 	email.send()
+		# id = request.POST.get('id', '')
+		# url = '\n 투표에 참여하시려면 클릭하세요 => ' + f'http://localhost:8000/vote_specifications/{id}'
+		# content+=url
 
-		# _sendEmail(title, content, receiver)
+		# array = []
+		# array[index]
+		# index+=1
+		
+		def _sendEmail(title, content):
+			email = EmailMessage(title, content, to=['donggoracontact@gmail.com'])
+			email.send()
+
+		_sendEmail(title, content)
 
 		return redirect('main')
 
@@ -98,14 +101,36 @@ def mypage(request):
 
 @login_required(login_url='/login/')
 def tables(request):
-	return render(request, "tables.html")
+	polls = Poll.objects.all()
+	ctx = {
+		'polls': polls
+	}
+	return render(request, "tables.html", ctx)
 
 
 @login_required(login_url='/login/')
 def findpw(request):
-	return render(request, "findpw.html")
+	if request.method == "GET": # 비번찾기 화면 띄워주기
+		return render(request, "findpw.html")
+	elif request.method == "POST": # 비밀번호 찾기
+		data = request.POST.dict()
+		del data['csrfmiddlewaretoken']
+		print(data)
+		email = data['email']
+		user = User.objects.filter(email)
+		if user:
+			# todo
+			return redirect('index')
+		else:
+			# todo
+			return redirect('findpw')
 
 
 @login_required(login_url='/login/')
-def vote_specifications(request):
-	return render(request, "vote_specifications.html")
+def vote_specifications(request, id):
+	poll = Poll.objects.filter(id)
+	ctx = {
+		'poll': poll
+	}
+
+	return render(request, "vote_specifications.html", ctx)
