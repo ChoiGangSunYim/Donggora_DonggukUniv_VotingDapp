@@ -3,7 +3,7 @@ from rest_framework import serializers
 from .models import Poll, Vote, Comment
 User = get_user_model()
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['email', 'password']
@@ -18,7 +18,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         return instance
 
 
-class CommentSerializer(serializers.HyperlinkedModelSerializer):
+class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ['user', 'content', 'poll']
@@ -27,7 +27,7 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
         return Comment.objects.create(**vallidated_data)
 
 
-class PollSerializer(serializers.HyperlinkedModelSerializer):
+class PollSerializer(serializers.ModelSerializer):
     class Meta:
         model = Poll
         fields = ['author', 'title', 'content', 'valid_until', 'category', 'pros', 'cons']
@@ -42,7 +42,7 @@ class PollSerializer(serializers.HyperlinkedModelSerializer):
         return instance
 
 
-class VoteSerializer(serializers.HyperlinkedModelSerializer):
+class VoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vote
         fields = ['email', 'password']

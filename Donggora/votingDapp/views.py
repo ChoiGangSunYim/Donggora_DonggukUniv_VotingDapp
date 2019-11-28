@@ -51,9 +51,12 @@ def vote(request):
 		data = request.POST.dict()
 		del data['csrfmiddlewaretoken']
 		data['valid_until'] = data['year'] + '-' + data['month'] + '-' + data['day']
+		data['author'] = request.user.id
+		data['category'] = data['category'][len(data['category'])-1:len(data['category'])]
 		del data['year']
 		del data['month']
 		del data['day']
+		
 
 		print(data)
 		serializer = PollSerializer(data=data)
