@@ -20,7 +20,7 @@ urlpatterns = [
     path('findpw', views.findpw, name='findpw'),
     path('vote', views.vote, name='vote'),
     path('vote_specifications/<int:id>', views.vote_specifications, name='vote_specifications'),
-    # path('vote_specifications/proscons/<int:id>', views.vote_specifications_proscons, name='vote_specifications_proscons'),
+    path('vote_proscons/<int:id>', views.vote_proscons, name='vote_proscons'),
     path('tables', views.tables, name='tables'),
     path('comment', views.comment, name='comment'),
 ]

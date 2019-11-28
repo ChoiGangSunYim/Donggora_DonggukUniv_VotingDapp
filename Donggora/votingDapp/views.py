@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
 from rest_framework import viewsets
 from rest_framework.parsers import JSONParser
+import json
 from .serializer import UserSerializer, PollSerializer, VoteSerializer, CommentSerializer
 from .models import Poll, Vote, Comment
 User = get_user_model()
@@ -61,25 +62,26 @@ def vote(request):
 		serializer = PollSerializer(data=data)
 		if serializer.is_valid():
 			serializer.save()
-			return redirect('main')
 		else:
 			print(serializer.errors)
 			return HttpResponse(status=400)
 
-		# id = request.POST.get('id', '')
-		# url = '\n 투표에 참여하시려면 클릭하세요 => ' + f'http://localhost:8000/vote_specifications/{id}'
-		# content+=url
+		title = data['title']
+		poll_id = Poll.objects.latest('id').id
+		url = '\n 투표에 참여하시려면 클릭하세요 => ' + f'http://localhost:8000/vote_specifications/{poll_id}'
+		content = ''
+		content+=url
 
 		# array = []
 		# array[index]
 		# index+=1
-		
 
-		# def _sendEmail(title, content):
-		# 	email = EmailMessage(title, content, to=['donggoracontact@gmail.com'])
-		# 	email.send()
+		def _sendEmail(_title, _content):
+			email = EmailMessage(_title, _content, to=['donggoracontact@gmail.com'])
+			email.send()
+			print("email sent")
 
-		# _sendEmail(title, content)
+		_sendEmail(f"[동고라] 새로운 투표가 등록되었어요: {title}", content)
 
 		return redirect('main')
 
@@ -175,16 +177,13 @@ def vote_specifications(request, id):
 	return render(request, "vote_specifications.html", ctx)
 
 
-# @login_required(login_url='/login/')
-# def vote_specifications_proscons(request, id, votetype):
-# 	poll = Poll.objects.get(id=id)
-# 	if votetype == 'pros':
-# 		poll.pros+=1
-# 	elif votetype == 'cons':
-# 		poll.cons+=1
-# 	poll.save()
+@login_required(login_url='/login/')
+def vote_proscons(request, id):
+	poll = Poll.objects.get(id=id)
 
-# 	return redirect('vote_specifications', id=id)
+
+
+	return redirect('vote_specifications', id=id)
 
 
 @login_required(login_url='/login/')
