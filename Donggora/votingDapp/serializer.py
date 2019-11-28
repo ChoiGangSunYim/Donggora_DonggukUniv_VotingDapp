@@ -6,14 +6,17 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['email', 'password']
+        fields = ['name', 'email', 'password', 'gender', 'phone', 'department']
 
-    def create(self, vallidated_data):
-        return User.objects.create(**vallidated_data)
+    def create(self, validated_data):
+        user = super().create(validated_data)
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
 
-    def update(self, instance, vallidated_data):
-        instance.name = vallidated_data.get('name', instance.name)
-        instance.email = vallidated_data.get('email', instance.name)
+    def update(self, instance, validated_data):
+        instance.name = validated_data.get('name', instance.name)
+        instance.email = validated_data.get('email', instance.name)
         instance.save()
         return instance
 
@@ -23,8 +26,8 @@ class CommentSerializer(serializers.ModelSerializer):
         model = Comment
         fields = ['user', 'content', 'poll']
 
-    def create(self, vallidated_data):
-        return Comment.objects.create(**vallidated_data)
+    def create(self, validated_data):
+        return Comment.objects.create(**validated_data)
 
 
 class PollSerializer(serializers.ModelSerializer):
@@ -32,12 +35,12 @@ class PollSerializer(serializers.ModelSerializer):
         model = Poll
         fields = ['author', 'title', 'content', 'valid_until', 'category', 'pros', 'cons']
 
-    def create(self, vallidated_data):
-        return Poll.objects.create(**vallidated_data)
+    def create(self, validated_data):
+        return Poll.objects.create(**validated_data)
 
-    def update(self, vallidated_data):
-        instance.pros = vallidated_data.get('pros', instance.pros)
-        instance.cons = vallidated_data.get('cons', instance.cons)
+    def update(self, validated_data):
+        instance.pros = validated_data.get('pros', instance.pros)
+        instance.cons = validated_data.get('cons', instance.cons)
         instance.save()
         return instance
 

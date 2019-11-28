@@ -113,6 +113,7 @@ def signup(request):
 	elif request.method == "POST": # 회원가입 처리
 		data = request.POST.dict()
 		del data['csrfmiddlewaretoken']
+		data['department'] = data['department'][len(data['department'])-1:len(data['department'])]
 		print(data)
 		serializer = UserSerializer(data=data)
 		if serializer.is_valid():
@@ -125,7 +126,12 @@ def signup(request):
 
 @login_required(login_url='/login/')
 def mypage(request):
-	return render(request, "mypage.html")
+	my_polls = Poll.objects.filter(author=request.user.id)
+	ctx = {
+		'my_polls': my_polls,
+	}
+
+	return render(request, "mypage.html", ctx)
 
 
 @login_required(login_url='/login/')
@@ -186,7 +192,7 @@ def comment(request):
 	if request.method == 'POST':
 		data = request.POST.dict()
 		del data['csrfmiddlewaretoken']
-		data['user'] = request.user
+		data['user'] = request.user.id
 		print(data)
 		serializer = CommentSerializer(data=data)
 		if serializer.is_valid():

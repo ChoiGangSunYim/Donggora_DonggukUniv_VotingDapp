@@ -9,7 +9,7 @@
           {% csrf_token %}
           <div class="form-group">
             <div class="form-label-group">
-                  <input name="username" type="text" id="firstName" class="form-control" placeholder="First name" required="required" autofocus="autofocus">
+                  <input name="name" type="text" id="firstName" class="form-control" placeholder="First name" required="required" autofocus="autofocus">
                   <label for="firstName">이름 입력</label>
             </div>
           </div>
@@ -27,8 +27,8 @@
             </div>
           <div class="input-group mb-3">
             <select name="gender" class="custom-select" id="inputGroupSelect01">
-              <option value="남자">남자</option>
-              <option value="여자">여자</option>
+              <option value="남">남</option>
+              <option value="여">여</option>
             </select>
           </div>
           <div class="input-group mb-3">
