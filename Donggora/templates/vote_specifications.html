@@ -34,12 +34,6 @@
     <p>카테고리: {{ poll.category }}</p>
     <p>내용: {{ poll.content }}</p>
 
-    <div style="text-align : center;">
-      <form action="{% url 'vote_specifications/pros/' id=poll.id %}">
-        찬성수: {{ poll.pros }}<input type="button" value=" 찬성 ">&nbsp;&nbsp;&nbsp;
-        반대수: {{ poll.cons }}<input type="button" value=" 반대 ">
-      </form>
-    </div>
 
     <form action="{% url 'comment' %}" method="POST">
       {% csrf_token %}

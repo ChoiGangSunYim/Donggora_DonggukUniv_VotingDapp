@@ -56,7 +56,6 @@ def vote(request):
 		del data['year']
 		del data['month']
 		del data['day']
-		
 
 		print(data)
 		serializer = PollSerializer(data=data)
@@ -170,22 +169,16 @@ def vote_specifications(request, id):
 	return render(request, "vote_specifications.html", ctx)
 
 
-@login_required(login_url='/login/')
-def vote_specifications_pros(request, id):
-	poll = Poll.objects.get(id=id)
-	poll.pros+=1
-	poll.save()
+# @login_required(login_url='/login/')
+# def vote_specifications_proscons(request, id, votetype):
+# 	poll = Poll.objects.get(id=id)
+# 	if votetype == 'pros':
+# 		poll.pros+=1
+# 	elif votetype == 'cons':
+# 		poll.cons+=1
+# 	poll.save()
 
-	return redirect('vote_specifications', id=id)
-
-
-@login_required(login_url='/login/')
-def vote_specifications_cons(request, id):
-	poll = Poll.objects.get(id=id)
-	poll.cons+=1
-	poll.save()
-
-	return redirect('vote_specifications', id=id)
+# 	return redirect('vote_specifications', id=id)
 
 
 @login_required(login_url='/login/')
