@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block body %}
-<script type="text/javascript" src="static/js/smartContract.js"></script>
+{% load static %}
+<script type="text/javascript" src="{% static 'js/smartContract.js' %}"></script>
+
 
 <div id="wrapper">
   <!-- Sidebar -->
