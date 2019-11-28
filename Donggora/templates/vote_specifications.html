@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% block body %}
+<script type="text/javascript" src="static/js/smartContract.js"></script>
+
 <div id="wrapper">
   <!-- Sidebar -->
   <ul class="sidebar navbar-nav">
@@ -36,8 +38,8 @@
 
     <div style="text-align : center;">
       <form action="{% url 'vote_specifications/pros/' id=poll.id %}">
-        찬성수: {{ poll.pros }}<input type="button" value=" 찬성 ">&nbsp;&nbsp;&nbsp;
-        반대수: {{ poll.cons }}<input type="button" value=" 반대 ">
+        찬성수: {{ poll.pros }}<input type="button" onclick="vote(1)" value=" 찬성 ">&nbsp;&nbsp;&nbsp;
+        반대수: {{ poll.cons }}<input type="button" onclick="vote(2)" value=" 반대 ">
       </form>
     </div>
 
