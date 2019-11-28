@@ -42,9 +42,11 @@
                 <th>투표 제목</th>
                 <th>구분</th>
                 <th>투표 작성자</th>
-                <th>투표 참여자 수</th>
+                <th>찬성</th>
+                <th>반대</th>
+                <th>시작</th>
+                <th>종료</th>
                 <th>투표 현황</th>
-                <th>시작/종료</th>
               </tr>
             </thead>
             <tbody>
@@ -55,7 +57,7 @@
                     <a href="{% url 'vote_specifications' id=poll.id %}" class="list-group-item list-group-item-action">{{ poll.title }}</a>
                     </td>
                     <td>{{ poll.category }}</td>
-                    <td>{{ poll.author_id }}</td>
+                    <td>{{ poll.author.name }}</td>
                     <td>{{ poll.pros }}</td>
                     <td>{{ poll.cons }}</td>
                     <td>{{ poll.created_at }}</td>
