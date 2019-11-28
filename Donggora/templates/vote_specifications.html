@@ -29,18 +29,17 @@
 
   <div id="content-wrapper" style="margin-left : 100px; margin-right : 100px;">
     <h1><b>투표 상세 내용</b></h1><br>
-      {% for poll in poll %}
-        {{poll.id}}
-        <h2>안건: {{ poll.title }}</h2>
-        <p>작성자: {{ poll.author }}</p>
-        <p>카테고리: {{ poll.category }}</p>
-        <p>내용: {{ poll.content }}</p>
+    <h2>안건: {{ poll.title }}</h2>
+    <p>작성자: {{ poll.author }}</p>
+    <p>카테고리: {{ poll.category }}</p>
+    <p>내용: {{ poll.content }}</p>
 
-        <div style="text-align : center;">
-          찬성수: {{ poll.pros }}<input type="button" value=" 찬성 ">&nbsp;&nbsp;&nbsp;
-          반대수: {{ poll.cons }}<input type="button" value=" 반대 ">
-        </div>
-      {% endfor %}
+    <div style="text-align : center;">
+      <form action="{% url 'vote_specifications/pros/' id=poll.id %}">
+        찬성수: {{ poll.pros }}<input type="button" value=" 찬성 ">&nbsp;&nbsp;&nbsp;
+        반대수: {{ poll.cons }}<input type="button" value=" 반대 ">
+      </form>
+    </div>
 
     <form action="{% url 'comment' %}" method="POST">
       {% csrf_token %}
@@ -48,6 +47,7 @@
         <h3>Comments</h3>
         <b>입력 : </b><textarea name="content" cols="70" rows="3"></textarea>
         <input type="submit" value=" 확인 ">
+        <input type="hidden" name="poll" value={{poll.id}}>
       </div>
     </form>
 
@@ -55,7 +55,7 @@
       {% for comment in comments %}
       <div style="border: 5px ridge grey;">
         <div>
-          {{ comment.author }}
+          {{ comment.user }}
         </div>
         <div>
           {{ comment.content }}

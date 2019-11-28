@@ -21,13 +21,25 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class CommentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Comment
-        fields = ['author', 'content', 'poll']
+        fields = ['user', 'content', 'poll']
+
+    def create(self, vallidated_data):
+        return Comment.objects.create(**vallidated_data)
 
 
 class PollSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Poll
-        fields = ['author', 'title', 'content', 'valid_until', 'category']
+        fields = ['author', 'title', 'content', 'valid_until', 'category', 'pros', 'cons']
+
+    def create(self, vallidated_data):
+        return Poll.objects.create(**vallidated_data)
+
+    def update(self, vallidated_data):
+        instance.pros = vallidated_data.get('pros', instance.pros)
+        instance.cons = vallidated_data.get('cons', instance.cons)
+        instance.save()
+        return instance
 
 
 class VoteSerializer(serializers.HyperlinkedModelSerializer):

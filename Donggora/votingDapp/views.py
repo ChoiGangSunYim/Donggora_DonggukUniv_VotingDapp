@@ -30,6 +30,18 @@ class VoteViewSet(viewsets.ModelViewSet):
     serializer_class = VoteSerializer
 
 index = 0
+poll_list = [
+    '0x7203a59116d8d001611fcec365377783945d6993',
+    '0x2463709dd20605d3527f647dd54867e87824f4d4',
+    '0xb2a7a74bed8d3d74e0bf50f694a8953540f86eee',
+    '0x4f3bcd57c08a01dc91f1e567e628869ef9109450',
+    '0x57f3283c812ff20520e66b53b74285cddd4ab78d',
+    '0x66fe2c18cb0428d174e26d0aae1091b3b4b3a75d',
+    '0x0524c05eb8735626c71e2daea0ab54c2fea5a0be',
+    '0xbf58f59e4d19012c7b16ff44102da4881899c9e2',
+    '0x36387a7299eec6d8e61670dd08ddba09667b4129',
+    '0x44a55355dfbe245df70cd1c46b450d03ff206c61',
+]
 
 @login_required(login_url='/login/')
 def vote(request):
@@ -60,6 +72,7 @@ def vote(request):
 		# array[index]
 		# index+=1
 		
+
 		# def _sendEmail(title, content):
 		# 	email = EmailMessage(title, content, to=['donggoracontact@gmail.com'])
 		# 	email.send()
@@ -143,7 +156,7 @@ def findpw(request):
 
 @login_required(login_url='/login/')
 def vote_specifications(request, id):
-	poll = Poll.objects.filter(id=id)
+	poll = Poll.objects.get(id=id)
 	comments = Comment.objects.filter(poll=id)
 
 	ctx = {
@@ -155,17 +168,34 @@ def vote_specifications(request, id):
 
 
 @login_required(login_url='/login/')
-def comment(request, poll_id):
+def vote_specifications_pros(request, id):
+	poll = Poll.objects.get(id=id)
+	poll.pros+=1
+	poll.save()
+
+	return redirect('vote_specifications', id=id)
+
+
+@login_required(login_url='/login/')
+def vote_specifications_cons(request, id):
+	poll = Poll.objects.get(id=id)
+	poll.cons+=1
+	poll.save()
+
+	return redirect('vote_specifications', id=id)
+
+
+@login_required(login_url='/login/')
+def comment(request):
 	if request.method == 'POST':
-		content = request.POST.get('content', '')
 		data = request.POST.dict()
 		del data['csrfmiddlewaretoken']
-		data['poll'] = poll_id
+		data['user'] = request.user
 		print(data)
 		serializer = CommentSerializer(data=data)
 		if serializer.is_valid():
 			serializer.save()
-			return redirect('vote_specifications')
+			return redirect('vote_specifications', id=request.user.id)
 		else:
 			print(serializer.errors)
 			return HttpResponse(status=400)

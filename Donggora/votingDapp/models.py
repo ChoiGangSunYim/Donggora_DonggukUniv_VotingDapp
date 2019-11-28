@@ -84,7 +84,6 @@ class User(AbstractBaseUser):
         return self.is_admin
 
 
-
 class Poll(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
@@ -99,6 +98,7 @@ class Poll(models.Model):
 
     def __str__(self):
         return self.title
+
 
 class Comment(models.Model):
     content = models.TextField()
