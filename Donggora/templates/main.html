@@ -34,7 +34,7 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           {% if user.is_authenticated %}
-          <p>{{ user.username}}님 안녕하세요!</p>
+          <p>{{ user.name}}님 안녕하세요!</p>
           {% else %}
           <a href="/login">투표를 하시려면 로그인하셔야합니다/</a>
           <a href="/signup">회원이 아니세요?</a>

@@ -183,10 +183,24 @@ def vote_specifications(request, id):
 @login_required(login_url='/login/')
 def vote_proscons(request, id):
 	poll = Poll.objects.get(id=id)
-
-
+	print(poll.pros)
+	data = request.POST.dict()
+	if data['type'] == '찬성':
+		poll.pros+=1
+	else:
+		poll.cons+=1
+	poll.save()
 
 	return redirect('vote_specifications', id=id)
+		
+	# serializer = CommentSerializer(data=data, partial=True)
+	# if serializer.is_valid():
+	# 	serializer.update()
+	# 	return redirect('vote_specifications', id=id)
+	# else:
+	# 	print(serializer.errors)
+	# 	return HttpResponse(status=400)
+
 
 
 @login_required(login_url='/login/')
