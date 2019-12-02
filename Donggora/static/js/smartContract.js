@@ -185,3 +185,4 @@ function vote(index) {
 		console.log(err);
 	});
 }
+
