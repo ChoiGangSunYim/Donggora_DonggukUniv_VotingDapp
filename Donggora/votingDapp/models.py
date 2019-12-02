@@ -90,6 +90,7 @@ class Poll(models.Model):
     cons = models.IntegerField(default=0)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     contract = models.CharField(max_length=255, blank=True, null=True)
+    is_done = models.BooleanField(default=False)
     # restriction = ArrayField(models.IntegerField(max_length=2, blank=True), size=8)
 
     def __str__(self):

@@ -1,3 +1,5 @@
+import json
+import datetime
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import get_user_model, authenticate
@@ -7,12 +9,17 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
 from rest_framework import viewsets
 from rest_framework.parsers import JSONParser
-import json
 from .serializer import UserSerializer, PollSerializer, VoteSerializer, CommentSerializer
 from .models import Poll, Vote, Comment
 User = get_user_model()
 
 def main(request):
+	polls = Poll.objects.all()
+	for poll in polls:
+		if ((poll.valid_until - datetime.date.today()).days) < 0:
+			poll.is_done = True
+			poll.save()
+
 	return render(request, "main.html")
 
 
@@ -140,11 +147,23 @@ def mypage(request):
 
 
 @login_required(login_url='/login/')
-def tables(request):
-	polls = Poll.objects.all()
-
+def finished_specifications(request):
+	polls = Poll.objects.filter(is_done=True)
 	ctx = {
 		'polls': polls
+	}
+
+	return render(request, "finished_specifications.html", ctx)
+
+
+@login_required(login_url='/login/')
+def tables(request):
+	polls = Poll.objects.filter(is_done=False)
+	end_polls = Poll.objects.filter(is_done=True)
+
+	ctx = {
+		'polls': polls,
+		'end_polls': end_polls,
 	}
 	return render(request, "tables.html", ctx)
 
@@ -183,7 +202,6 @@ def vote_specifications(request, id):
 @login_required(login_url='/login/')
 def vote_proscons(request, id):
 	poll = Poll.objects.get(id=id)
-	print(poll.pros)
 	data = request.POST.dict()
 	if data['type'] == '찬성':
 		poll.pros+=1
@@ -192,15 +210,6 @@ def vote_proscons(request, id):
 	poll.save()
 
 	return redirect('vote_specifications', id=id)
-		
-	# serializer = CommentSerializer(data=data, partial=True)
-	# if serializer.is_valid():
-	# 	serializer.update()
-	# 	return redirect('vote_specifications', id=id)
-	# else:
-	# 	print(serializer.errors)
-	# 	return HttpResponse(status=400)
-
 
 
 @login_required(login_url='/login/')

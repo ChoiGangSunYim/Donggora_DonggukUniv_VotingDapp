@@ -46,7 +46,6 @@
                 <th>반대</th>
                 <th>시작</th>
                 <th>종료</th>
-                <th>투표 현황</th>
               </tr>
             </thead>
             <tbody>
@@ -62,20 +61,46 @@
                     <td>{{ poll.cons }}</td>
                     <td>{{ poll.created_at }}</td>
                     <td>{{ poll.valid_until }}</td>
-                    <td style="text-align : center; vertical-align : middle;">
-                      <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;">
-                          70%
-                        </div>
-                      </div>
-                    </td>
-                    <td>0921/1022</td>
-                    </td>
                   </tr>
                 </div>
               {% endfor %}
             </tbody>
           </table>
+
+          <br>
+          <br>
+          <br>
+          종료된 투표
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>투표 제목</th>
+                  <th>구분</th>
+                  <th>투표 작성자</th>
+                  <th>찬성</th>
+                  <th>반대</th>
+                  <th>시작</th>
+                  <th>종료</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for poll in end_polls %}
+                  <div class="list-group">
+                    <tr>
+                      <td>
+                      <a href="{% url 'vote_specifications' id=poll.id %}" class="list-group-item list-group-item-action">{{ poll.title }}</a>
+                      </td>
+                      <td>{{ poll.category }}</td>
+                      <td>{{ poll.author.name }}</td>
+                      <td>{{ poll.pros }}</td>
+                      <td>{{ poll.cons }}</td>
+                      <td>{{ poll.created_at }}</td>
+                      <td>{{ poll.valid_until }}</td>
+                    </tr>
+                  </div>
+                {% endfor %}
+              </tbody>
+            </table>
         </div>
       </div>
       <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>

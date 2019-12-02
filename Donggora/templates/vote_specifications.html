@@ -40,11 +40,11 @@
     <p>내용: {{ poll.content }}</p>
 
     <div style="text-align : center;">
-      <form action="{% url 'vote_proscons' id=poll.id %}" method="POST">
-        {% csrf_token %}
-        찬성수: <span id="pros"></span><input name="type" type="submit" onclick="vote(0)" value="찬성">
-        반대수: <span id="cons"></span><input name="type" type="submit" onclick="vote(1)" value="반대">
-      </form>
+        <form action="{% url 'vote_proscons' id=poll.id %}" method="POST">
+            {% csrf_token %}
+            찬성수: <span id="pros"></span> &nbsp; <input name="pros" type="submit" onclick="vote(0)" value="찬성" style="color : white; background-color:black; border-radius : 0.5em;">
+            반대수: <span id="cons"></span> &nbsp; <input name="cons" type="submit" onclick="vote(1)" value="반대" style="color : white; background-color:black; border-radius : 0.5em;">
+        </form>
     </div>
 
     <script>
@@ -58,17 +58,17 @@
 
     <form action="{% url 'comment' %}" method="POST">
       {% csrf_token %}
-      <div style="border: 5px ridge grey;">
-        <h3>Comments</h3>
-        <b>입력 : </b><textarea name="content" cols="70" rows="3"></textarea>
-        <input type="submit" value=" 확인 ">
-        <input type="hidden" name="poll" value={{poll.id}}>
+      <div style="margin-top : 10px; padding-left : 10px; border: 5px ridge grey; background-color : #DDDDDD;">
+          <h3>Comments</h3>
+          <textarea cols="70" rows="3" style="width : 80%;"></textarea>
+          <input type="submit" value=" 등록 " style="color : white; background-color:black; border-radius : 0.5em; position : relative; bottom : 10px;">
+          <input type="hidden" name="poll" value={{poll.id}}>
       </div>
     </form>
 
     {% if comments %}
       {% for comment in comments %}
-      <div style="border: 5px ridge grey;">
+      <div style="padding-left : 10px; border: 5px ridge grey; background-color : #DDDDDD;">
         <div>
           {{ comment.user }}
         </div>
