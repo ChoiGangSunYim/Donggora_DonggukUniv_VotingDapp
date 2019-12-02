@@ -2,7 +2,8 @@ web3 = new Web3(web3.currentProvider);
 window.ethereum.enable();
 
 // for test
-var contractAddress = '0x7203a59116d8d001611fcec365377783945d6993';
+//var contractAddress = '0x7203a59116d8d001611fcec365377783945d6993';
+var contractAddress;
 //test = 0x679e69c8c69040090ae3e4b32639509212ec6128
 var abi = [
 	{
@@ -163,26 +164,23 @@ function getCandidate() {
 	//console.log("length of list : " + length);
 }*/
 
-function showTheResult() {
-	var name;
-	var max = 0;
+function showTheResult(index, id) {
+	//document.getElementById("test").innerHTML = result;
+	// console.log(contractAddress);
+	var votingInstance = web3.eth.contract(abi);
+	var Donggora = votingInstance.at(contractAddress);
 
-
-	var obj = Donggora.getCandidateListLength(function(err, result){
-		//console.log("length is " + result);
-		length = result;
-		for (var i=0;i<result;i++){
-			//document.getElementById("test").innerHTML = result;
-			
-			Donggora.getCandidate(i, function(err, result){
-				console.log("name : " + result[0]);
-				console.log("count : " + result[1]);
-			});
-		}
+	Donggora.getCandidate(index, function (err, result) {
+		//console.log("name : " + result[0]);
+		//console.log("count : " + result[1]);
+		document.getElementById(id).innerHTML = result[1];
 	});
 }
 
 function vote(index) {
+	var votingInstance = web3.eth.contract(abi);
+	var Donggora = votingInstance.at(contractAddress);
+	
 	Donggora.vote(index, function (err, result) {
 		console.log(err);
 	});

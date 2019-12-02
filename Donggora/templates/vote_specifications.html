@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block body %}
 {% load static %}
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/smartContract.js' %}"></script>
-
 
 <div id="wrapper">
   <!-- Sidebar -->
@@ -39,15 +39,24 @@
     <p>내용: {{ poll.content }}</p>
 
     <div style="text-align : center;">
-<<<<<<< HEAD
-=======
-      <form action="{% url 'vote_proscons' id=poll.id %}" method="POST">
+      <!--<form action="{% url 'vote_proscons' id=poll.id %}" method="POST">
         {% csrf_token %}
         찬성수: {{ poll.pros }}<input name="pros" type="submit" onclick="vote(1)" value="찬성">&nbsp;&nbsp;&nbsp;
         반대수: {{ poll.cons }}<input name="cons" type="submit" onclick="vote(2)" value="반대">
->>>>>>> c7cd40cac0e4c6bb746fce88eaf52e84194b212f
-      </form>
+      </form>-->
+
+      <div id="pros"></div><input name="pros" type="submit" onclick="vote(0)" value="찬성">
+      <div id="cons"></div><input name="cons" type="submit" onclick="vote(1)" value="반대">
     </div>
+
+    <script>
+      $(document).ready(function () {
+        contractAddress = '0x2463709dd20605d3527f647dd54867e87824f4d4';  
+        //contractAddress = '{{poll.contract}}';
+        showTheResult(0, "pros");
+        showTheResult(1, "cons");
+      }); 
+    </script>
 
     <form action="{% url 'comment' %}" method="POST">
       {% csrf_token %}
@@ -60,19 +69,19 @@
     </form>
 
     {% if comments %}
-      {% for comment in comments %}
-      <div style="border: 5px ridge grey;">
-        <div>
-          {{ comment.user }}
-        </div>
-        <div>
-          {{ comment.content }}
-        </div>
-        <div>
-          {{ comment.created_at }}
-        </div>
+    {% for comment in comments %}
+    <div style="border: 5px ridge grey;">
+      <div>
+        {{ comment.user }}
       </div>
-      {% endfor %}
+      <div>
+        {{ comment.content }}
+      </div>
+      <div>
+        {{ comment.created_at }}
+      </div>
+    </div>
+    {% endfor %}
     {% endif %}
   </div>
 </div>
