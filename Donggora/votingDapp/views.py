@@ -196,7 +196,7 @@ def comment(request):
 		serializer = CommentSerializer(data=data)
 		if serializer.is_valid():
 			serializer.save()
-			return redirect('vote_specifications', id=request.user.id)
+			return redirect('vote_specifications', id=data['poll'])
 		else:
 			print(serializer.errors)
 			return HttpResponse(status=400)
