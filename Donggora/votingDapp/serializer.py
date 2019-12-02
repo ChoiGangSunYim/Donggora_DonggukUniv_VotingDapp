@@ -33,7 +33,7 @@ class CommentSerializer(serializers.ModelSerializer):
 class PollSerializer(serializers.ModelSerializer):
     class Meta:
         model = Poll
-        fields = ['author', 'title', 'content', 'valid_until', 'category', 'pros', 'cons']
+        fields = ['author', 'title', 'content', 'valid_until', 'category', 'pros', 'cons', 'contract']
 
     def create(self, validated_data):
         return Poll.objects.create(**validated_data)

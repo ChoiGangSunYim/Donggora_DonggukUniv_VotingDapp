@@ -57,6 +57,9 @@ def vote(request):
 		del data['year']
 		del data['month']
 		del data['day']
+		global index
+		data['contract'] = poll_list[index]
+		index+=1
 
 		print(data)
 		serializer = PollSerializer(data=data)
