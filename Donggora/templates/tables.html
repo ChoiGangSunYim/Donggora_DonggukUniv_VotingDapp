@@ -88,7 +88,7 @@
                   <div class="list-group">
                     <tr>
                       <td>
-                      <a href="{% url 'vote_specifications' id=poll.id %}" class="list-group-item list-group-item-action">{{ poll.title }}</a>
+                      <a href="{% url 'finished_specifications' id=poll.id %}" class="list-group-item list-group-item-action">{{ poll.title }}</a>
                       </td>
                       <td>{{ poll.category }}</td>
                       <td>{{ poll.author.name }}</td>

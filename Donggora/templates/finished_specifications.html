@@ -34,19 +34,16 @@
 
   <div id="content-wrapper" style="margin-left : 100px; margin-right : 100px;">
     <h1><b>투표 상세 내용</b></h1><br>
-    {% if end_polls %}
-        {% for poll in end_polls %}
-            <h2>안건: {{ poll.title }}</h2>
-            <p>작성자: {{ poll.author }}</p>
-            <p>카테고리: {{ poll.category }}</p>
-            <p>내용: {{ poll.content }}</p>
+      <h2>안건: {{ poll.title }}</h2>
+      <p>작성자: {{ poll.author }}</p>
+      <p>카테고리: {{ poll.category }}</p>
+      <p>내용: {{ poll.content }}</p>
 
-            <div style="text-align : center;">
-                찬성수: <div id="pros"></div><input name="pros" >
-                반대수: <div id="cons"></div><input name="cons" >
-            </div>
-        {% endfor %}
-    {% endif %}
+      <div style="text-align : center;">
+          찬성수: <div id="pros"></div><input name="pros" >
+          반대수: <div id="cons"></div><input name="cons" >
+      </div>
+
 
     <script>
       $(document).ready(function () {

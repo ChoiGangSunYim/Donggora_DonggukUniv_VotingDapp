@@ -147,10 +147,13 @@ def mypage(request):
 
 
 @login_required(login_url='/login/')
-def finished_specifications(request):
-	polls = Poll.objects.filter(is_done=True)
+def finished_specifications(request, id):
+	poll = Poll.objects.get(id=id)
+	comments = Comment.objects.filter(poll=id)
+
 	ctx = {
-		'polls': polls
+		'poll': poll,
+		'comments': comments
 	}
 
 	return render(request, "finished_specifications.html", ctx)
