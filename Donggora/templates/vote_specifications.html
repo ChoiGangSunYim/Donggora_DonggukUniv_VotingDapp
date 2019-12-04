@@ -60,7 +60,7 @@
       {% csrf_token %}
       <div style="margin-top : 10px; padding-left : 10px; border: 5px ridge grey; background-color : #DDDDDD;">
           <h3>Comments</h3>
-          <textarea cols="70" rows="3" style="width : 80%;"></textarea>
+          <textarea name="content" cols="70" rows="3" style="width : 80%;"></textarea>
           <input type="submit" value=" 등록 " style="color : white; background-color:black; border-radius : 0.5em; position : relative; bottom : 10px;">
           <input type="hidden" name="poll" value={{poll.id}}>
       </div>
