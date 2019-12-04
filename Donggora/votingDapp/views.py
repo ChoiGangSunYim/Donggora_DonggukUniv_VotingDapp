@@ -67,6 +67,7 @@ def vote(request):
 		global index
 		data['contract'] = poll_list[index]
 		index+=1
+		print("smart contract index: ", index)
 
 		print(data)
 		serializer = PollSerializer(data=data)
@@ -225,7 +226,10 @@ def comment(request):
 		serializer = CommentSerializer(data=data)
 		if serializer.is_valid():
 			serializer.save()
-			return redirect('vote_specifications', id=data['poll'])
+			if data['finished'] == 'true':
+				return redirect('finished_specifications', id=data['poll'])
+			else:
+				return redirect('vote_specifications', id=data['poll'])
 		else:
 			print(serializer.errors)
 			return HttpResponse(status=400)

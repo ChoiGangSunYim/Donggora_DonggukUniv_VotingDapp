@@ -32,9 +32,9 @@
       <img src='static\images\voteImg.png' width=5% height=5%>
       <h2>투표 생성</h2><hr>
       {% csrf_token %}
-      제목 : <input type="text" name="title"></label><br>
+      제목 : <input type="text" name="title" required></label><br>
       내용<br>
-      <textarea cols="40" rows="8" name="content"></textarea><br>
+      <textarea cols="40" rows="8" name="content" required></textarea><br>
       <div class="input-group mb-3">
         <div class="input-group-prepend">
           <label class="input-group-text" for="inputGroupSelect01">카테고리</label>

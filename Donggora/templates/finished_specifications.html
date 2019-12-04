@@ -40,8 +40,8 @@
       <p>내용: {{ poll.content }}</p>
 
       <div style="text-align : center;">
-          찬성수: <div id="pros"></div><input name="pros" >
-          반대수: <div id="cons"></div><input name="cons" >
+          찬성수: <span id="pros"></span> &nbsp;
+          반대수: <span id="cons"></span> &nbsp;
       </div>
 
 
@@ -61,6 +61,7 @@
         <b>입력 : </b><textarea name="content" cols="70" rows="3"></textarea>
         <input type="submit" value=" 확인 ">
         <input type="hidden" name="poll" value={{poll.id}}>
+        <input type="hidden" name="finished" value="true">
       </div>
     </form>
 
